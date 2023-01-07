@@ -1,0 +1,220 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+04/01/2023
+
+aciyom bookmark folder ordan bakan projeye
+
+ama html ve xml file parsing icin beautifulsoup olabilir
+
+
+
+
+
+
+
+
+
+
+
+
+
+03/01/2023
+
+use python ?? SIMPLE GUI ??
+
+feedparser ??
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+02/01/2023
+
+
+bookmark thing from 0 desktop app
+
+
+maybe just a preview gui application (in the first case) that 
+you can - hover on link to genrate preview of website then make it scrollable and readable - 
+then worry about ordering and layouting them ??? ...
+
+
+.net vs .net core 
+
+asp net used for web applications 
+
+
+add more related to above
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+31/10/2022
+
+
+dene bak ve yaza aşağıya
+
+
+
+WPF
+
+MFC
+
+.NET
+
+C / C# / C++
+
+WinUI ??
+
+
+
+
+
+
+
+****************
+GATHERING INFO
+****************
+
+
+Overview of Windows Programming in C++
+(oku ve not al sonra - 03/11/2022)
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+-
+
+https://learn.microsoft.com/en-us/cpp/windows/overview-of-windows-programming-in-cpp?view=msvc-170
+
+
+
+
+
+
+try QT - xamarin (forms) diye geçer adı bak - MAUI(most updated and newest)
+
+winUI vs wpf
+
+winUI vs MAUI
+
+wpf vs MAUI (**)
+
+
+🤔 Thoughts on future of MAUI for desktop software? Comparing to WPF + personally weighing up "cross-platform desires" -vs- pragmatic productivity"
+https://www.reddit.com/r/dotnet/comments/pmpfbz/thoughts_on_future_of_maui_for_desktop_software/
+
+
+
+What is .NET MAUI?
+(bak buna ama i think xamarin is the older of maui)
+
+https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui
+
+
+
+Does .NET MAUI support WPF?
+
+https://learn.microsoft.com/en-us/answers/questions/850625/can-we-create-wpf-applications-using-maui.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Draw diagrams using below link to have a representation of your work flow (path)
+
+(about how the application work)
+
+
+pseudo explanation: ↓
+
+somehow get chrome bookmarks --> app takes them(decide which one and what to use) and simply prints them --> user can make search in each folder/subfolder + hover to preview them - --> EXTRA FEATURES: user can add little notes to each one of them ... (saves eye pollution and easier way to see whats on the website + what did the user take as note when he/she previously visited that website)
+
+
+Draw diagram
+(google search)
+https://www.google.com/search?q=draw+diagram&rlz=1C1CHBF_en-GBGB947GB947&sxsrf=ALiCzsbujicolT5kQfJR2P47UTgr0OsNqQ%3A1667157626086&ei=es5eY4P2BM2AhbIPsMaHmAE&ved=0ahUKEwiDm9mQ1oj7AhVNQEEAHTDjARMQ4dUDCBA&uact=5&oq=draw+diagram&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQkQIyBQgAEJECMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6BAgjECc6BAgAEEM6CwgAEIAEELEDEIMBOhEILhCABBCxAxCDARDHARDRAzoHCAAQsQMQQzoNCC4QsQMQxwEQ0QMQQzoKCC4QsQMQ1AIQQzoOCC4QgAQQsQMQxwEQrwE6CwguEIAEELEDEIMBOggILhCABBCxAzoICAAQsQMQgwE6DQgAEIAEELEDEIMBEAo6BwgAEIAEEApKBAhBGABKBAhGGABQAFjdDmDuF2gAcAB4AIABYogB2QaSAQIxMpgBAKABAcABAQ&sclient=gws-wiz-serp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
