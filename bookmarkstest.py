@@ -4,29 +4,21 @@
 
 # VS CODE bookmarks thing
 
-
 # Import the json module
 import json
-
-from tkinter import *
 
 '''
 import webview
 
-
 window = Tk()
-
 name_label = Label(window, text='Username').pack()
 
-
 window.mainloop()
-
 
 webview.create_window('Hello world', 'https://pywebview.flowrl.com/hello')
 webview.start()
 
 '''
-
 
 # Open the file and read the contents
 with open("C:/Users/Mert Arkin/AppData/Local/Google/Chrome/User Data/Default/Bookmarks", "r", encoding="utf8") as f:
@@ -95,7 +87,7 @@ for i in range(len(bookmark_folder_contents)):  # 605
     temp = bookmark_folder_contents[i].get("type")
     if (temp == "folder"):  # Only 8 folders
         c += 1
-        # print(c)
+        print(bookmark_folder_contents[i].get("name"))
     # else:
         # print(bookmark_folder_contents[i])
         # print(i, test_folder1[i])
@@ -113,50 +105,134 @@ for i in range(c):
 
 # I CAN CHECK THE NESTED FOLDERS BELOW
 
-print()
+print("\nWe start below ↓")
+print(c)
 
 n = 0
-while n != c:
+
+# Create a list to hold the dictionaries of name-URL pairs
+name_url_pairs = []
+
+
+def get_items(bookmark_folder_contents, level=0):
+    items = []
+    for item in bookmark_folder_contents:
+        temp = item.get("type")
+        if temp == "folder":
+            children = get_items(item.get("children"), level + 1)
+            items.append({"name": item.get("name"), "children": children})
+        else:
+            items.append({"name": item.get("name"), "url": item.get("url")})
+    return items
+
+
+name_url_pairs = get_items(bookmark_folder_contents)
+# Use json.dump() function to save it as json file
+with open("name_url_pairs.json", "w") as f:
+    json.dump(name_url_pairs, f, indent=4)
+
+# print(json.dumps(name_url_pairs, indent=4))
+
+"""
+WOW CHATGPT - BAK ESKI KOD'A DA
+
+AMA BU METHOD COK IYI VE HERSEYI DOGRU SAVE'LER
+
+BU LEVEL FILE, FOLDER MEKANIGI COK IYI
+
+
+bu json dosyayi parsela qt'ye yoksa direk appin icinden bu formata degis
+"""
+
+
+# bak buraya n != c vs n <= c
+while n <= c:
     temp = bookmark_folder_contents[n].get("url")
     if (temp == "chrome://bookmarks/"):
-        # print(temp)
-
         pass
     else:
-        # 7 folders
         name = bookmark_folder_contents[n].get("name")
-
-        # n = 1
-        # print(n)
-
-        # get children number in folders
         ch = bookmark_folder_contents[n].get("children")
-        print("\n" + name + " - items inside:" + str(len(ch)))
+        print("\n" + name + " - items inside: " + str(len(ch)))
 
         x = 0
         for i in range(len(ch)):
             temp = ch[i].get("type")
             if (temp == "folder"):
                 x += 1
-        # print(str(x) + " - SUBFOLDERS\n")
-        if (x == 0):
-            print("subfolder folder num: ", x)
 
+        print("subfolder folder num: ", x)
         if (x != 0):
-            print("subfolder folder num: ", x)
+            y = 0
             for i in range(x):
-                sub_ch = bookmark_folder_contents[n].get("children")[
-                    i].get("children")
-                print("number of items in subfolders", len(sub_ch))
-                # for j in range(len(sub_ch)):
-                #    print(sub_ch[j].get("name"))
-
-                # one more nested subfolder it is going to be (4) - 12 subfolders on 2022 [1]
-                # for
-
-    if (n == 4):
-        break
+                temp = ch[i].get("type")
+                if (temp == "folder"):
+                    y += 1
+                    print(
+                        "\t" + ch[i].get("name") + " - items inside: " + str(len(ch[i].get("children"))))
+                    temp2 = ch[i].get("children")
+                    z = 0
+                    for j in range(len(temp2)):
+                        temp3 = temp2[j].get("type")
+                        if (temp3 == "folder"):
+                            z += 1
+                            print(
+                                "\t\t" + temp2[j].get("name") + " - items inside: " + str(len(temp2[j].get("children"))))
+                            temp4 = temp2[j].get("children")
+                            w = 0
+                            for k in range(len(temp4)):
+                                temp5 = temp4[k].get("type")
+                                if (temp5 == "folder"):
+                                    w += 1
+                                    print(
+                                        "\t\t\t" + temp4[k].get("name") + " - items inside: " + str(len(temp4[k].get("children"))))
     n += 1
+
+    # HATIRLATMA: ch = bookmark_folder_contents[n].get("children")
+    """
+        herseyi children olarak treatlerim o yzuden looplar ilk basta olmasi lazim
+        folderlarin ki calissin, ilerde yap bunu ki folderlarin yeri belli, indexe gore gitsin
+        yada baska complex structure, maybe generic classes ? - smh custom ?
+
+        turn it into 1 method that you loop over ...
+        """
+
+    # j is correct too
+    # print(j)
+
+    # folder inside folder inside folder inside folder 1< f < f < f < f -- 4 nested folders into each other (this is my program capacity)
+
+    # if (a[i].get("type") == "folder"):
+    # sub_ch = bookmark_folder_contents[n].get("children")[
+    #    i].get("children")
+
+    # *** im here ! - 15/01/2023
+    # print(len(sub_ch))
+    # print("number of items in subfolders", len(sub_ch))
+    # for j in range(len(sub_ch)):
+    #    print(sub_ch[j].get("name"))
+
+    # one more nested subfolder it is going to be (4) - 12 subfolders on 2022 [1]
+    # for
+
+    # if (n == 8):
+    #     break
+    # n += 1
+
+    """
+    HOW TO STRUCTURIZE THIS
+    EVERY FOLDER MIGHT HAVE SOME SUBFOLDERS BUT NOT AT THE TOP ?? SOLVE THIS
+
+    DO A LOOP
+
+    COUNT FOLDERS
+
+    THEN PRINT THEM ??
+
+
+
+
+    """
 
     '''
     if (n == 0):
@@ -192,6 +268,10 @@ c = bookmark_folder_contents[3].get("children")[0].get("children")
 
 # porn folder
 c1 = bookmark_folder_contents[3].get("children")[1].get("children")
+
+c2 = bookmark_folder_contents[4].get(
+    "children")[0].get("children")[10].get("children")[0].get("children")
+# print(c2)
 
 
 '''
