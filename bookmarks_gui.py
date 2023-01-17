@@ -1,4 +1,7 @@
+
 import sys
+import json
+
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
 from PyQt5.QtWebEngineWidgets import *
@@ -90,9 +93,22 @@ class WebWidget(QWidget):
         self.setLayout(self.layout)
 
 
+class ParseBookmarks():
+    def __init__(self):
+        super(ParseBookmarks, self).__init__()
+        with open("C:/Users/Mert Arkin/AppData/Local/Google/Chrome/User Data/Default/Bookmarks", "r", encoding="utf8") as f:
+            data = json.load(f)
+
+        self.roots = data.get("roots")
+        self.bookmark_bar = self.roots.get("bookmark_bar")
+        self.bookmark_folder_contents = self.bookmark_bar.get("children")
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+
+        self.bookmarks = ParseBookmarks()
 
         self.setWindowTitle("Bookmarks App")
 
@@ -123,6 +139,7 @@ class MainWindow(QMainWindow):
         self.tree_widget = QTreeWidget()
         self.tree_widget .setHeaderHidden(True)
 
+        """
         self.folder = QTreeWidgetItem(self.tree_widget)
         self.folder.setText(0, 'Folder 1')
         self.links_widget.layout.addWidget(self.tree_widget)
@@ -140,6 +157,7 @@ class MainWindow(QMainWindow):
         # self.child_folder2.setText(0, "Child Folder 1")
 
         self.left_widget.setLayout(self.left_layout)
+        """
 
         self.web = WebWidget()
 
@@ -166,6 +184,46 @@ class MainWindow(QMainWindow):
         """
         self.resize(1200, 600)
 
+        """
+        c = 0
+        for i in range(len(self.bookmarks.bookmark_folder_contents)):  # 605
+            temp = self.bookmarks.bookmark_folder_contents[i].get("type")
+            if (temp == "folder"):  # Only 8 folders
+                c += 1
+                print(self.bookmarks.bookmark_folder_contents[i].get("name"))
+                self.folderx = QTreeWidgetItem(self.tree_widget)
+                self.folderx.setText(
+                    0, self.bookmarks.bookmark_folder_contents[i].get("name"))
+                self.links_widget.layout.addWidget(self.tree_widget)
+        print(c)
+        """
+        print("\nWe start below ↓")
+
+        def create_tree(bookmark_folder_contents, parent=None):
+            for item in bookmark_folder_contents:
+                if item.get("type") == "folder":
+                    folderx = QTreeWidgetItem(parent)
+                    folderx.setText(0, item.get("name"))
+                    create_tree(item.get("children"), folderx)
+                else:
+                    link_item = QTreeWidgetItem(parent)
+
+                    # link_item.setText(0, item.get("name"))
+                    # link_item.setText(0, item.get("url"))
+
+                    url = item.get("url")
+                    label = QLabel(url)
+                    label.mousePressEvent = lambda event, url=url: self.open_link(
+                        event, url)
+                    self.tree_widget.setItemWidget(link_item, 0, label)
+
+        # Add the root folder to the tree widget
+        root = QTreeWidgetItem(self.tree_widget)
+        root.setText(0, "Bookmarks bar")
+        create_tree(self.bookmarks.bookmark_folder_contents, root)
+        self.links_widget.layout.addWidget(self.tree_widget)
+
+        """
         links = ["youtube.com", "www.blogger.com", "www.google.com", "play.google.com", "apple.com",
                  "support.google.com", "linkedin.com", "microsoft.com", "mozilla.org", "en.wikipedia.org", "youtube.com", "www.blogger.com", "www.google.com", "play.google.com", "apple.com",
                  "support.google.com", "linkedin.com", "microsoft.com", "mozilla.org", "en.wikipedia.org", "support.google.com", "linkedin.com", "microsoft.com", "mozilla.org", "en.wikipedia.org",
@@ -210,6 +268,8 @@ class MainWindow(QMainWindow):
 
         self.folder.setText(
             0, 'Folder 1 (' + str(self.folder.childCount()) + ')')
+        
+        """
 
         self.tree_widget.itemClicked.connect(self.on_link_clicked)
 
@@ -236,19 +296,24 @@ class MainWindow(QMainWindow):
         self.open_action.triggered.connect(self.on_open_clicked)
         self.toolbar.addAction(self.open_action)
 
-        self.search_box.textChanged.connect(self.filter_items)
+        # BAK !
+        # self.search_box.textChanged.connect(self.filter_items)
 
         # functionize everything so any change in data structure then do it by calling your special/single function for it
         # dont use labels use folders and - !
 
         # nice, make folder child look 2 px bigger
 
+        '''
         self.folders = [self.folder, self.folder2,
                         self.child_folder]  # self.child_folder2]
+        '''
 
         # use append to append them in a list when created (see if you can make nested folders ?)
         # self.folders.append(self.folder2)
 
+    '''
+    BROKEN NOW !!! - 17/01/2023 fix later - imported all data and cen webview !
     # no parameter passed when fuction is called ?
     def filter_items(self, search_text):
         # search_term = self.search_box.text() and dont use the second parameter / change the logic way and
@@ -274,6 +339,8 @@ class MainWindow(QMainWindow):
                     item.setHidden(True)
                 else:
                     item.setHidden(False)
+    '''
+
     """
     this onnly checks the first folder - first iteration of search
     def search_links(self, text):
@@ -297,6 +364,7 @@ class MainWindow(QMainWindow):
                 if item.childCount() == 0:
                     item.setHidden(False)
 
+    # Open in web browser
     def on_open_clicked(self):
         url = self.web.web_view.url().toString()
         QDesktopServices.openUrl(QUrl(url))
@@ -311,7 +379,7 @@ class MainWindow(QMainWindow):
 
     def open_link(self, event, url):
         print(url)
-        self.web.web_view.load(QUrl("https://"+url))
+        self.web.web_view.load(QUrl(url))  # "https://"
         # self.splitter.setSizes([300, 600])
         # self.splitter.setStretchFactor(1, 4)
 

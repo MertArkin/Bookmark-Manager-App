@@ -16,6 +16,40 @@
 
 
 
+
+
+16/01/2023
+
+import chrome_bookmarks
+
+# iterate through all folders
+for folder in chrome_bookmarks.folders:
+    children = folder.folders
+    # print(folder.name)
+# Iterate through the children
+for child in children:
+    indentation = "\t"
+    if child.type == "folder":
+        print(indentation + child.name)
+        sub_children = child.children
+        for sub_child in sub_children:
+            if sub_child.type == "folder":
+                indentation += "\t"
+                print(indentation + sub_child.name)
+            else:
+                print(indentation + sub_child.name + " - " + sub_child.url)
+
+
+
+
+
+
+
+
+
+
+
+
 04/01/2023
 
 aciyom bookmark folder ordan bakan projeye

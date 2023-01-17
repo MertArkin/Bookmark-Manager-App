@@ -20,10 +20,6 @@ webview.start()
 
 '''
 
-# Open the file and read the contents
-with open("C:/Users/Mert Arkin/AppData/Local/Google/Chrome/User Data/Default/Bookmarks", "r", encoding="utf8") as f:
-    # contents = f.read()
-    data = json.load(f)
 
 # for d in data:
 #    print(d)
@@ -51,6 +47,14 @@ with open("C:/Users/Mert Arkin/AppData/Local/Google/Chrome/User Data/Default/Boo
 # print(element)
 
 # all bookmarks until other, (it doesnt inlude other for some reason!)
+
+
+# Open the file and read the contents
+with open("C:/Users/Mert Arkin/AppData/Local/Google/Chrome/User Data/Default/Bookmarks", "r", encoding="utf8") as f:
+    # contents = f.read()
+    data = json.load(f)
+
+
 roots = data.get("roots")
 
 # for r in roots:
@@ -88,6 +92,7 @@ for i in range(len(bookmark_folder_contents)):  # 605
     if (temp == "folder"):  # Only 8 folders
         c += 1
         print(bookmark_folder_contents[i].get("name"))
+
     # else:
         # print(bookmark_folder_contents[i])
         # print(i, test_folder1[i])
@@ -108,7 +113,6 @@ for i in range(c):
 print("\nWe start below ↓")
 print(c)
 
-n = 0
 
 # Create a list to hold the dictionaries of name-URL pairs
 name_url_pairs = []
@@ -128,8 +132,12 @@ def get_items(bookmark_folder_contents, level=0):
 
 name_url_pairs = get_items(bookmark_folder_contents)
 # Use json.dump() function to save it as json file
-with open("name_url_pairs.json", "w") as f:
-    json.dump(name_url_pairs, f, indent=4)
+try:
+    with open("name_url_pairs.json", "w") as f:
+        json.dump(name_url_pairs, f, indent=4)
+except Exception as e:
+    print("An error occured while saving the json file: " + str(e))
+    exit()
 
 # print(json.dumps(name_url_pairs, indent=4))
 
@@ -144,6 +152,25 @@ BU LEVEL FILE, FOLDER MEKANIGI COK IYI
 bu json dosyayi parsela qt'ye yoksa direk appin icinden bu formata degis
 """
 
+# works
+
+
+def print_folder_info(bookmark_folder_contents, level=0):
+    for item in bookmark_folder_contents:
+        if item.get("type") == "folder":
+            print("\t"*level + item.get("name") +
+                  " - items inside: " + str(len(item.get("children"))))
+            print_folder_info(item.get("children"), level+1)
+
+
+try:
+    print_folder_info(bookmark_folder_contents)
+except Exception as e:
+    print("An error occured while printing the folder info: " + str(e))
+    exit()
+
+"""
+n = 0
 
 # bak buraya n != c vs n <= c
 while n <= c:
@@ -187,9 +214,10 @@ while n <= c:
                                     print(
                                         "\t\t\t" + temp4[k].get("name") + " - items inside: " + str(len(temp4[k].get("children"))))
     n += 1
+"""
 
-    # HATIRLATMA: ch = bookmark_folder_contents[n].get("children")
-    """
+# HATIRLATMA: ch = bookmark_folder_contents[n].get("children")
+"""
         herseyi children olarak treatlerim o yzuden looplar ilk basta olmasi lazim
         folderlarin ki calissin, ilerde yap bunu ki folderlarin yeri belli, indexe gore gitsin
         yada baska complex structure, maybe generic classes ? - smh custom ?
@@ -197,29 +225,29 @@ while n <= c:
         turn it into 1 method that you loop over ...
         """
 
-    # j is correct too
-    # print(j)
+# j is correct too
+# print(j)
 
-    # folder inside folder inside folder inside folder 1< f < f < f < f -- 4 nested folders into each other (this is my program capacity)
+# folder inside folder inside folder inside folder 1< f < f < f < f -- 4 nested folders into each other (this is my program capacity)
 
-    # if (a[i].get("type") == "folder"):
-    # sub_ch = bookmark_folder_contents[n].get("children")[
-    #    i].get("children")
+# if (a[i].get("type") == "folder"):
+# sub_ch = bookmark_folder_contents[n].get("children")[
+#    i].get("children")
 
-    # *** im here ! - 15/01/2023
-    # print(len(sub_ch))
-    # print("number of items in subfolders", len(sub_ch))
-    # for j in range(len(sub_ch)):
-    #    print(sub_ch[j].get("name"))
+# *** im here ! - 15/01/2023
+# print(len(sub_ch))
+# print("number of items in subfolders", len(sub_ch))
+# for j in range(len(sub_ch)):
+#    print(sub_ch[j].get("name"))
 
-    # one more nested subfolder it is going to be (4) - 12 subfolders on 2022 [1]
-    # for
+# one more nested subfolder it is going to be (4) - 12 subfolders on 2022 [1]
+# for
 
-    # if (n == 8):
-    #     break
-    # n += 1
+# if (n == 8):
+#     break
+# n += 1
 
-    """
+"""
     HOW TO STRUCTURIZE THIS
     EVERY FOLDER MIGHT HAVE SOME SUBFOLDERS BUT NOT AT THE TOP ?? SOLVE THIS
 
@@ -234,7 +262,7 @@ while n <= c:
 
     """
 
-    '''
+'''
     if (n == 0):
         temp = bookmark_folder_contents[n].get("url")
         print(temp)

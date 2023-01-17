@@ -1986,6 +1986,10 @@
             {
                 "name": "AF Utility Sprayduster / Air Duster Compressed Gas Can - HFC Free - Flammable - Non-Invertible Removal of Dust and Debris - 2 x 400ml Pack, ADU400UT, Blue : Amazon.co.uk: Everything Else",
                 "url": "https://www.amazon.co.uk/AF-Non-Invertible-Sprayduster-Removal-Debris/dp/B08DFWR1K1/ref=rvi_sccl_5/261-7765181-1384255?pd_rd_w=TFU1C&content-id=amzn1.sym.febd3956-4d60-4288-b8f2-cb468eb6674d&pf_rd_p=febd3956-4d60-4288-b8f2-cb468eb6674d&pf_rd_r=ZHB30BE5A4BJS35DY911&pd_rd_wg=G1TaA&pd_rd_r=91e9f2d2-ec68-4586-81e1-25ae756783e1&pd_rd_i=B08DFWR1K1&psc=1"
+            },
+            {
+                "name": "andrewp-as-is (Andrew P)",
+                "url": "https://github.com/andrewp-as-is"
             }
         ]
     },
@@ -2727,6 +2731,14 @@
                     {
                         "name": "horizontal vs vertical - Google Search",
                         "url": "https://www.google.com/search?q=horizontal+vs+vertical&rlz=1C1CHBF_en-GBGB947GB947&tbm=isch&sxsrf=AJOqlzUbZGxcWO34FVJktojxefJBE6ZsvQ:1673672246637&source=lnms&sa=X&ved=2ahUKEwiPuOz9osb8AhVLg1wKHV5WDU8Q_AUoAXoECAoQAw&biw=958&bih=927&dpr=1"
+                    },
+                    {
+                        "name": "chrome-bookmarks \u00b7 PyPI",
+                        "url": "https://pypi.org/project/chrome-bookmarks/"
+                    },
+                    {
+                        "name": "andrewp-as-is/chrome-bookmarks.py: Google Chrome bookmarks helper",
+                        "url": "https://github.com/andrewp-as-is/chrome-bookmarks.py"
                     }
                 ]
             },
